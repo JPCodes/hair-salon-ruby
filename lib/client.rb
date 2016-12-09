@@ -1,15 +1,17 @@
 class Client
-  attr_reader(:name, :phone, :stylist_id)
+  attr_reader(:id, :name, :phone, :stylist_id)
 
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
     @phone = attributes.fetch(:phone)
     @stylist_id = attributes.fetch(:stylist_id)
+    @id = attributes.fetch(:id)
   end
 
   # Create
   define_method(:save) do
-    DB.exec("INSERT INTO clients (name, phone, stylist_id) VALUES ('#{@name}', '#{@phone}', #{@stylist_id})")
+    result = DB.exec("INSERT INTO clients (name, phone, stylist_id) VALUES ('#{@name}', '#{@phone}', #{@stylist_id}) RETURNING id;")
+    @id = result.first().fetch('id').to_i
   end
 
   # Read
@@ -20,14 +22,34 @@ class Client
       name = client.fetch('name')
       phone = client.fetch('phone')
       stylist_id = client.fetch('stylist_id').to_i
-      all_clients.push(Client.new({:name => name, :phone => phone, :stylist_id => stylist_id}))
+      id = client.fetch('id').to_i
+      all_clients.push(Client.new({:name => name, :phone => phone, :stylist_id => stylist_id, :id => id}))
     end
     all_clients
   end
 
   # Update
+  define_method(:update) do |attributes|
+    @name = attributes.fetch(:name)
+    @phone = attributes.fetch(:phone)
+    @stylist_id = attributes.fetch(:stylist_id)
+    @id = self.id()
+    DB.exec("UPDATE clients SET name = '#{@name}' WHERE id = #{@id}")
+  end
 
   # Delete
+
+  # Find by ID
+  define_singleton_method(:find) do |id_num|
+    returned_clients = Client.all()
+    found_client = nil
+    returned_clients.each() do |client|
+      if client.id() == id_num
+        found_client = client
+      end
+    end
+    found_client
+  end
 
 
   # Double equals modify for RSpec
