@@ -42,4 +42,15 @@ describe(Stylist) do
     end
   end
 
+  describe('#delete') do
+    it('deletes a stylist from the database') do
+      stylist1 = Stylist.new({:id => nil, :name => 'Cutty McCuts-a-lot'})
+      stylist1.save()
+      stylist2 = Stylist.new({:id => nil, :name => "Non-descript hair stylist that no one is sure actually works there and the manager doesnt remember hiring but everyone plays along because hes a nice dude"})
+      stylist2.save()
+      stylist1.delete()
+      expect(Stylist.all()).to(eq([stylist2]))
+    end
+  end
+
 end
