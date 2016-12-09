@@ -35,7 +35,7 @@ class Stylist
   define_method(:delete) do
     DB.exec("DELETE FROM stylists WHERE id = #{self.id()};")
     # Instead of removing the clients from the database, sets their stylist_id back to default 0 which indicates no stylist is assigned to the client
-    # DB.exec("UPDATE clients SET stylist_id = 0 WHERE stylist_id = #{self.id()}")
+    DB.exec("UPDATE clients SET stylist_id = 0 WHERE stylist_id = #{self.id()}")
   end
 
   # Find by ID
