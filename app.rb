@@ -12,11 +12,13 @@ get('/') do
   erb(:index)
 end
 
-# Clients
+# Start Clients Routing
+# All Clients View
 get('/clients') do
   @all_clients = Client.all()
   erb(:clients)
 end
+# End All Clients View
 
 # Add Clients
 get('/clients/new') do
@@ -27,12 +29,37 @@ post('/new_client') do
   @client_name = params.fetch('client_name')
   @client_phone = params.fetch('client_phone')
   Client.new({:name => @client_name, :phone => @client_phone, :stylist_id => 0, :id => nil}).save()
+  @all_clients = Client.all()
   erb(:clients)
 end
 # End Add Clients
 
-# Stylists
+# Individual Client Pages
+get('/client/:id') do
+  @current_client = Client.find(params.fetch('id').to_i)
+  erb(:client)
+end
+# End Individual Client Pages
+# End Clients Routing
+
+# Start Stylists Routing
+# All Stylists View
 get('/stylists') do
   @all_stylists = Stylist.all()
   erb(:stylists)
 end
+# End All Stylists View
+
+# Add Stylists
+get('/stylists/new') do
+  erb(:new_stylist)
+end
+
+post('/new_stylist') do
+  @stylist_name = params.fetch('stylist_name')
+  Stylist.new({:id => nil, :name => @stylist_name}).save()
+  @all_stylists = Stylist.all()
+  erb(:stylists)
+end
+# End Add Stylists
+# End Stylists Routing

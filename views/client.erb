@@ -1,0 +1,11 @@
+<h1>Information for <%= @current_client.name() %></h1>
+
+<p>Name: <%= @current_client.name() %></p>
+<p>Phone: <%= @current_client.phone() %></p>
+<% if @current_client.stylist_id() > 0 %>
+  <p>Stylist: <%= @current_client.stylist_id() %>
+<% else %>
+  <p>This client has no stylist set.</p>
+<% end %>
+
+<p><a href="/">Home</a></p>

@@ -4,13 +4,7 @@
   <p>You have no clients :(</p>
 <% else %>
   <% @all_clients.each() do |client| %>
-    <p>Name: <%= client.name() %></p>
-    <p>Phone: <%= client.phone() %></p>
-    <% if client.stylist_id() > 0 %>
-      <p>Stylist: <%= client.stylist_id() %>
-    <% else %>
-      <p>This client has no stylist set.</p>
-    <% end %>
+    <p>Name: <a href="/client/<%= client.id()%>"><%= client.name() %></a></p>
   <% end %>
 <% end %>
 
