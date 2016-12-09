@@ -24,6 +24,13 @@ class Stylist
     stylists
   end
 
+  # Update
+  define_method(:update) do |attributes|
+    @name = attributes.fetch(:name, @name)
+    @id = self.id()
+    DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{@id}")
+  end
+
   # Find by ID
   define_singleton_method(:find) do |id_num|
     returned_stylists = Stylist.all()
