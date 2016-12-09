@@ -1,15 +1,15 @@
 <h1>Clients for Cutty McHaircuts Hair Salon</h1>
 
-<% if !@all_clients.any? %>
+<% if @all_clients.nil? or !@all_clients.any? %>
   <p>You have no clients :(</p>
 <% else %>
   <% @all_clients.each() do |client| %>
     <p>Name: <%= client.name() %></p>
     <p>Phone: <%= client.phone() %></p>
-    <% if client.list_id() == nil %>
-      <p>This client has no stylist set.</p>
+    <% if client.stylist_id() > 0 %>
+      <p>Stylist: <%= client.stylist_id() %>
     <% else %>
-      <p>Stylist: <%= client.list_id() %>
+      <p>This client has no stylist set.</p>
     <% end %>
   <% end %>
 <% end %>
