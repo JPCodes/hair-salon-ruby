@@ -62,4 +62,19 @@ post('/new_stylist') do
   erb(:stylists)
 end
 # End Add Stylists
+
+# Individual Stylist Pages
+get('/stylist/:id') do
+  @current_stylist = Stylist.find(params.fetch('id').to_i)
+  erb(:stylist)
+end
+
+patch("/stylist/:id") do
+  @current_stylist = Stylist.find(params.fetch("id").to_i())
+  new_name = params.fetch('new_name')
+  @current_stylist.update({:name => new_name})
+  @all_stylists = Stylist.all()
+  erb(:stylist)
+end
+# End Individual Stylist Pages
 # End Stylists Routing

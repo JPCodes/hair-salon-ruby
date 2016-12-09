@@ -4,7 +4,7 @@
   <p>You have no stylists :(</p>
 <% else %>
   <% @all_stylists.each() do |stylist| %>
-    <p>Name: <%= stylist.name() %></p>
+    <p>Name: <a href="stylist/<%= stylist.id() %>"><%= stylist.name() %></a></p>
   <% end %>
 <% end %>
 
