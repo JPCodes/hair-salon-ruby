@@ -38,6 +38,9 @@ class Client
   end
 
   # Delete
+  define_method(:delete) do
+    DB.exec("DELETE FROM clients WHERE id = #{self.id()};")
+  end
 
   # Find by ID
   define_singleton_method(:find) do |id_num|
