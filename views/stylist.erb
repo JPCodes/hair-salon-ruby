@@ -6,8 +6,15 @@
   <label for="new_name">Rename the stylist:</label>
   <input id="new_name" name="new_name" type="text">
 
-  <button type="submit" class="btn btn-danger">Update</button>
+  <button type="submit" class="btn btn-warning">Update</button>
 </form>
+<br>
+<form action="/stylist/<%= @current_stylist.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+
+  <button type="submit" class="btn btn-danger">Fire Stylist</button>
+</form>
+<br>
 
 <p><a href="/stylists">Back</a></p>
 <p><a href="/">Home</a></p>

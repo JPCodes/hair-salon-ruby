@@ -76,5 +76,12 @@ patch("/stylist/:id") do
   @all_stylists = Stylist.all()
   erb(:stylist)
 end
+
+delete("/stylist/:id") do
+  @stylist = Stylist.find(params.fetch("id").to_i())
+  @stylist.delete()
+  @stylists = Stylist.all()
+  erb(:index)
+end
 # End Individual Stylist Pages
 # End Stylists Routing
