@@ -54,7 +54,6 @@ class Client
     found_client
   end
 
-
   # Double equals modify for RSpec
   define_method(:==) do |other_client|
     self.name().==(other_client.name()).&(self.phone().==(other_client.phone())).&(self.stylist_id().==(other_client.stylist_id()))

@@ -24,9 +24,21 @@ class Stylist
     stylists
   end
 
+  # Find by ID
+  define_singleton_method(:find) do |id_num|
+    returned_stylists = Stylist.all()
+    found_stylist = nil
+    returned_stylists.each() do |stylist|
+      if stylist.id() == id_num
+        found_stylist = stylist
+      end
+    end
+    found_stylist
+  end
+
   # Double equals modify for RSpec
   define_method(:==) do |other_stylist|
     self.name().==(other_stylist.name()).&(self.id().==(other_stylist.id()))
   end
-  
+
 end
