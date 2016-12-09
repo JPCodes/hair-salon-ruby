@@ -39,6 +39,20 @@ get('/client/:id') do
   @current_client = Client.find(params.fetch('id').to_i)
   erb(:client)
 end
+
+patch("/client/:id") do
+  @current_client = Client.find(params.fetch("id").to_i())
+  new_name = params.fetch('new_name')
+  @current_client.update({:name => new_name})
+  @all_clients = Client.all()
+  erb(:client)
+end
+
+delete("/client/:id") do
+  @curren_client = Client.find(params.fetch("id").to_i())
+  @curren_client.delete()
+  erb(:index)
+end
 # End Individual Client Pages
 # End Clients Routing
 
@@ -78,9 +92,8 @@ patch("/stylist/:id") do
 end
 
 delete("/stylist/:id") do
-  @stylist = Stylist.find(params.fetch("id").to_i())
-  @stylist.delete()
-  @stylists = Stylist.all()
+  @curren_stylist = Stylist.find(params.fetch("id").to_i())
+  @curren_stylist.delete()
   erb(:index)
 end
 # End Individual Stylist Pages
