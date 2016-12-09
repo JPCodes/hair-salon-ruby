@@ -3,9 +3,10 @@
 <p>Name: <%= @current_client.name() %></p>
 <p>Phone: <%= @current_client.phone() %></p>
 <% if @current_client.stylist_id() > 0 %>
-  <p>Stylist: <%= @current_client.stylist_id() %>
+  <p>Stylist: <p><a href="/client/assign_stylist/<%= @current_client.id() %>"> <%= @clients_stylist.name() %> (Click to reassign)</a></p>
 <% else %>
   <p>This client has no stylist set.</p>
+  <p><a href="/client/assign_stylist/<%= @current_client.id() %>">Assign a Stylist</a></p>
 <% end %>
 
 <form action="/client/<%= @current_client.id() %>" method="post">
@@ -18,9 +19,11 @@
   <input name="_method" type="hidden" value="patch">
 
   <label for="new_name">Rename the client:</label>
-  <input id="new_name" name="new_name" type="text">
+  <input id="new_name" name="new_name" type="text" class="form-control">
+
 
   <button type="submit" class="btn btn-warning">Update</button>
 </form>
 
+<p><a href="/clients">Back</a></p>
 <p><a href="/">Home</a></p>

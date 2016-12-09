@@ -1,0 +1,16 @@
+<h1>Assign a Stylist to this Client</h1>
+
+<form class="" action="/client/assign/<%= @current_client.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <label for="new_stylist">Assign a stylist to <%= @current_client.name() %> </label>
+  <select class="form-control" name="new_stylist" id="new_stylist">
+    <% @all_stylists.each() do |stylist| %>
+    <option value="<%= stylist.id() %>"><%= stylist.name() %></option>
+    <% end %>
+  </select>
+  <button type="submit" class="btn btn-primary">Assign</button>
+</form>
+
+<p><a href="/client/<%= @current_client.id() %>">Back to this Client's page</a></p>
+<p><a href="/clients">Back to all clients</a></p>
+<p><a href="/">Home</a></p>

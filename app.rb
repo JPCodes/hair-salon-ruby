@@ -37,19 +37,45 @@ end
 # Individual Client Pages
 get('/client/:id') do
   @current_client = Client.find(params.fetch('id').to_i)
+  @all_stylists = Stylist.all()
+  if @current_client.stylist_id() > 0
+    @clients_stylist = Stylist.find(@current_client.stylist_id().to_i)
+  end
   erb(:client)
 end
 
 patch("/client/:id") do
-  @current_client = Client.find(params.fetch("id").to_i())
+  @current_client = Client.find(params.fetch("id").to_i)
   new_name = params.fetch('new_name')
   @current_client.update({:name => new_name})
+  if @current_client.stylist_id() > 0
+    @clients_stylist = Stylist.find(@current_client.stylist_id().to_i)
+  end
+  @all_stylists = Stylist.all()
   @all_clients = Client.all()
   erb(:client)
 end
 
+  # Client, assign stylist page
+get('/client/assign_stylist/:id') do
+  @current_client = Client.find(params.fetch('id').to_i)
+  @all_stylists = Stylist.all()
+  erb(:assign_stylist)
+end
+
+patch("/client/assign/:id") do
+  @current_client = Client.find(params.fetch("id").to_i)
+  new_stylist_id = Stylist.find(params.fetch('new_stylist').to_i).id()
+  @current_client.update({:stylist_id => new_stylist_id})
+  if @current_client.stylist_id() > 0
+    @clients_stylist = Stylist.find(@current_client.stylist_id().to_i)
+  end
+  erb(:client)
+end
+  # End Client, assign stylist page
+
 delete("/client/:id") do
-  @curren_client = Client.find(params.fetch("id").to_i())
+  @curren_client = Client.find(params.fetch("id").to_i)
   @curren_client.delete()
   erb(:index)
 end

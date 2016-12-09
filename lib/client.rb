@@ -35,6 +35,7 @@ class Client
     @stylist_id = attributes.fetch(:stylist_id, @stylist_id)
     @id = self.id()
     DB.exec("UPDATE clients SET name = '#{@name}' WHERE id = #{@id}")
+    DB.exec("UPDATE clients SET stylist_id = #{@stylist_id} WHERE id = #{@id}")
   end
 
   # Delete
