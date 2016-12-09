@@ -28,9 +28,19 @@ describe(Client) do
 
   describe('.find') do
     it ('returns a client by ID') do
-      test_client = Client.new({:name => 'Isaac Newton', :phone => '3235551234', :stylist_id => 2, :id => nil})
+      test_client = Client.new({:name => 'Nicolaus Copernicus', :phone => '3235551234', :stylist_id => 2, :id => nil})
       test_client.save()
       expect(Client.find(test_client.id())).to(eq(test_client))
+    end
+  end
+
+  describe('#update') do
+    it ('updates a client') do
+      test_client = Client.new({:name => 'Isaac Newton', :phone => '3235551234', :stylist_id => 2, :id => nil})
+      test_client.save()
+      test_client.update({:name => 'Marie Curie', :phone => '96'})
+      expect(test_client.name()).to(eq('Marie Curie'))
+      expect(test_client.phone()).to(eq('96'))
     end
   end
 

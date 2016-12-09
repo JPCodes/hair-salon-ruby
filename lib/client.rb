@@ -30,9 +30,9 @@ class Client
 
   # Update
   define_method(:update) do |attributes|
-    @name = attributes.fetch(:name)
-    @phone = attributes.fetch(:phone)
-    @stylist_id = attributes.fetch(:stylist_id)
+    @name = attributes.fetch(:name, @name)
+    @phone = attributes.fetch(:phone, @phone)
+    @stylist_id = attributes.fetch(:stylist_id, @stylist_id)
     @id = self.id()
     DB.exec("UPDATE clients SET name = '#{@name}' WHERE id = #{@id}")
   end
