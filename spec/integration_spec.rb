@@ -62,8 +62,8 @@ describe('Rename a client', {:type => :feature}) do
   end
 end
 
-describe('Add a new client and see the clients information', {:type => :feature}) do
-  it('allows a user to click a client to see their details') do
+describe('Assign a stylist to a client', {:type => :feature}) do
+  it('allows a user to assign a stylist to a client') do
     visit('/')
     click_link('See list of stylists')
     click_link('Add a new stylist to the system')
