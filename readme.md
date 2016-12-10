@@ -1,12 +1,12 @@
 # Hair Salon Administration Page
 
-#### An app that allows the user to keep dictionary entries, 2 Dec 2016
+#### An app that allows the user to manage a hair salons clients and stylists, 9 Dec 2016
 
 #### By Jim Padilla
 
 ## Description
 
-This Ruby app has a front end interface where a user will enter two pieces of information. The first is a word, the second is a definition. The user can enter multiple definitions for the same word. The user can also create multiple word entries. Alphabetize functionality is optional and can be accessed from the home page. A search page link is also available, this allows the user to type in a word they would like to search for in a case-insensitive form.
+This Ruby app has a front end interface where a user can create clients and stylists. The user can also update and delete these entries and assign clients to a stylist.
 
 ## Setup/Installation Requirements
 
